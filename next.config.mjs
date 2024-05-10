@@ -3,14 +3,13 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: 'https',
+                protocol: "https",
                 hostname: "images.app.goo.gl",
-                port: '',
-                pathname: '/**',
+                port: "",
+                pathname: "/**",
             },
         ],
     },
 }
-
 
 export default nextConfig

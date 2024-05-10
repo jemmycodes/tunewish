@@ -1,19 +1,20 @@
 import Link from "next/link"
-import Image from "next/image"
+import Image, { StaticImageData } from "next/image"
 import DJDeck from "@/public/dj-deck.jpg"
 import PeoplePartying from "@/public/people-party.jpg"
-
 
 const actionCardData = [
     {
         title: "DJ",
-        description: "Fine tune your playlist to match your audience taste without leaving your stand",
+        description:
+            "Fine tune your playlist to match your audience taste without leaving your stand",
         image: DJDeck,
         link: "/DJ/login",
     },
     {
         title: "Listener",
-        description: "Play your favorite music and request songs from the DJ without leaving your seat",
+        description:
+            "Play your favorite music and request songs from the DJ without leaving your seat",
         image: PeoplePartying,
         link: "/listener/login",
     },
@@ -43,7 +44,7 @@ const ChooseAction = () => {
 
 interface ActionCardsProps {
     title: string
-    image: string
+    image: StaticImageData
     description: string
     link: string
 }
@@ -52,19 +53,19 @@ const ActionCards = ({ title, image, description, link }: ActionCardsProps) => {
     return (
         <Link
             href={link}
-            className="rounded-2xl  bg-[#101010]  max-w-sm mx-auto shadow-lg backdrop-blur-2xl flex  flex-col gap-2"
+            className="mx-auto flex max-w-sm flex-col gap-2 rounded-2xl bg-[#101010]  shadow-lg backdrop-blur-2xl"
         >
+            {" "}
             <Image
                 src={image}
                 alt={title}
-                className="h-48 w-full object-cover aspect-video rounded-t-2xl"
+                className="aspect-video h-48 w-full rounded-t-2xl object-cover"
                 height={100}
                 width={100}
             />
-            <hgroup className="flex flex-col gap-2 justify-center items-center px-5 py-5">
-
-            <p className=" text-2xl font-semibold">{title}</p>
-            <p className="text-center text-sm">{description}</p>
+            <hgroup className="flex flex-col items-center justify-center gap-2 px-5 py-5">
+                <p className=" text-2xl font-semibold">{title}</p>
+                <p className="text-center text-sm">{description}</p>
             </hgroup>
         </Link>
     )
