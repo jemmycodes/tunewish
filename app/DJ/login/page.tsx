@@ -1,10 +1,59 @@
-import { Login } from "@/app/_components"
+"use client"
+
+import { FormFieldContainer } from "@/app/_components"
 import { AuthLayout } from "@/app/_layouts"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { LoginSchema } from "@/utils/schema"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Form } from "@/components/ui/form"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 const DJLogin = () => {
+    const form = useForm<z.infer<typeof LoginSchema>>({
+        resolver: zodResolver(LoginSchema),
+    })
+
+    const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+        console.log(values)
+    }
     return (
-        <AuthLayout>
-            <Login userType="DJ" />
+        <AuthLayout action="Log In" userType="DJ">
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-8"
+                >
+                    <div className="grid gap-4">
+                        <FormFieldContainer
+                            label="Email"
+                            form={form}
+                            placeholder="johndoe@tunewish.co.uk"
+                            name="email"
+                        />
+
+                        <FormFieldContainer
+                            label="Password"
+                            form={form}
+                            name="password"
+                        />
+
+                        <Button type="submit" className="w-full">
+                            Log in
+                        </Button>
+                        <Button variant="outline" className="w-full">
+                            Log in with Google
+                        </Button>
+                    </div>
+                    <div className="mt-4 text-center text-sm">
+                        Don&apos;t have an account?{" "}
+                        <Link href={`/DJ/signup`} className="underline">
+                            Sign Up
+                        </Link>
+                    </div>
+                </form>
+            </Form>
         </AuthLayout>
     )
 }
