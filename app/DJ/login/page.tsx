@@ -1,8 +1,11 @@
+import { Login } from "@/app/_components"
+import { AuthLayout } from "@/app/_layouts"
+
 const DJLogin = () => {
     return (
-        <div>
-            <p>DJLogin</p>
-        </div>
+        <AuthLayout>
+            <Login userType="DJ" />
+        </AuthLayout>
     )
 }
 

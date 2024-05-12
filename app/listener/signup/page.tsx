@@ -1,8 +1,11 @@
+import { Signup } from "@/app/_components"
+import { AuthLayout } from "@/app/_layouts"
+
 const ListenerSignup = () => {
     return (
-        <div>
-            <p>ListenerSignup</p>
-        </div>
+        <AuthLayout>
+           <Signup userType="Listener" />
+        </AuthLayout>
     )
 }
 
