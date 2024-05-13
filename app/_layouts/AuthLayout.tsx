@@ -21,7 +21,7 @@ const AuthLayout = ({ children, userType, action }: CustomWrapperComponent) => {
     return (
         <main
             id="auth-layout"
-            className=" flex min-h-screen w-full items-center justify-center bg-cover p-10"
+            className=" flex min-h-screen w-full items-center justify-center bg-cover p-5"
         >
             <Image
                 src={authbg}

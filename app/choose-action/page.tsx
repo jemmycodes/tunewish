@@ -1,6 +1,7 @@
 import Link from "next/link"
-import Image, { StaticImageData } from "next/image"
+import bgImage from "@/public/choose-action-bg.jpg"
 import DJDeck from "@/public/dj-deck.jpg"
+import Image, { StaticImageData } from "next/image"
 import PeoplePartying from "@/public/people-party.jpg"
 
 const actionCardData = [
@@ -23,9 +24,16 @@ const actionCardData = [
 const ChooseAction = () => {
     return (
         <main className="flex min-h-screen w-screen items-center justify-center p-10">
+            <Image
+                src={bgImage}
+                alt=""
+                className="fixed top-0 -z-10 min-h-screen w-full  object-cover "
+            />
+
+            <div className="fixed top-0 -z-10 min-h-screen w-full bg-black/60"></div>
             <section className="flex flex-col items-center gap-8 ">
                 <hgroup className="flex flex-col items-center justify-center gap-2">
-                    <h1 className="text-4xl font-semibold">
+                    <h1 className="text-center text-4xl font-semibold">
                         Welcome to TuneWish
                     </h1>
                     <h2 className="text-sm text-white/70">
@@ -55,7 +63,6 @@ const ActionCards = ({ title, image, description, link }: ActionCardsProps) => {
             href={link}
             className="mx-auto flex max-w-sm flex-col gap-2 rounded-2xl bg-[#101010]  shadow-lg backdrop-blur-2xl"
         >
-            {" "}
             <Image
                 src={image}
                 alt={title}
