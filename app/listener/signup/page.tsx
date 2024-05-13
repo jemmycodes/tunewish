@@ -1,23 +1,17 @@
 "use client"
 
-import { z } from "zod"
 import Link from "next/link"
-import { useForm } from "react-hook-form"
+import { useSignup } from "@/app/hooks"
 import { AuthLayout } from "@/app/_layouts"
+import { Form } from "@/components/ui/form"
 import { SignupSchema } from "@/utils/schema"
 import { Button } from "@/components/ui/button"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { ReloadIcon } from "@radix-ui/react-icons"
 import { FormFieldContainer } from "@/app/_components"
-import { Form } from "@/components/ui/form"
 
 const ListenerSignup = () => {
-    const form = useForm<z.infer<typeof SignupSchema>>({
-        resolver: zodResolver(SignupSchema),
-    })
+    const { onSubmit, form, formState } = useSignup(SignupSchema)
 
-    const onSubmit = (values: z.infer<typeof SignupSchema>) => {
-        console.log(values)
-    }
     return (
         <AuthLayout userType="Listener" action="Sign Up">
             <Form {...form}>
@@ -62,11 +56,24 @@ const ListenerSignup = () => {
                             form={form}
                             name="confirmPassword"
                         />
-                        <Button type="submit" className="w-full">
-                            Signup
+                        <Button
+                            type="submit"
+                            className="w-full"
+                            disabled={formState === "loading"}
+                        >
+                            {formState === "loading" && (
+                                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                            )}
+                            {formState === "loading"
+                                ? "Creating Account"
+                                : "Sign Up"}
                         </Button>
-                        <Button variant="outline" className="w-full">
-                            Signup with Google
+                        <Button
+                            variant="outline"
+                            className="w-full"
+                            disabled={formState === "loading"}
+                        >
+                            Sign Up with Google
                         </Button>
                     </div>
                     <div className="mt-4 text-center text-sm">

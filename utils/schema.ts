@@ -7,10 +7,10 @@ const LoginSchema = z.object({
 
 const SignupSchema = z
     .object({
-        firstName: z.string(),
-        lastName: z.string(),
-        username: z.string().min(3).max(20),
-        email: z.string().email(),
+        firstName: z.string().trim(),
+        lastName: z.string().trim(),
+        username: z.string().min(3).max(20).trim(),
+        email: z.string().email().trim(),
         password: z
             .string()
             .min(8)

@@ -26,7 +26,7 @@ const AuthLayout = ({ children, userType, action }: CustomWrapperComponent) => {
             <Image
                 src={authbg}
                 alt="Party"
-                className="fixed -z-10 min-h-screen w-full  object-cover "
+                className="fixed top-0 -z-10 min-h-screen w-full  object-cover "
             />
 
             <div className="fixed top-0 -z-10 min-h-screen w-full bg-black/60"></div>

@@ -1,23 +1,17 @@
 "use client"
 
-import { z } from "zod"
 import Link from "next/link"
-import { useForm } from "react-hook-form"
+import { useLogin } from "@/app/hooks"
 import { AuthLayout } from "@/app/_layouts"
 import { Form } from "@/components/ui/form"
 import { LoginSchema } from "@/utils/schema"
 import { Button } from "@/components/ui/button"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { FormFieldContainer } from "@/app/_components"
+import { ReloadIcon } from "@radix-ui/react-icons"
 
 const DJLogin = () => {
-    const form = useForm<z.infer<typeof LoginSchema>>({
-        resolver: zodResolver(LoginSchema),
-    })
+    const { onSubmit, form, formState } = useLogin(LoginSchema)
 
-    const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-        console.log(values)
-    }
     return (
         <AuthLayout action="Log In" userType="Listener">
             <Form {...form}>
@@ -39,10 +33,21 @@ const DJLogin = () => {
                             name="password"
                         />
 
-                        <Button type="submit" className="w-full">
-                            Log in
+                        <Button
+                            type="submit"
+                            className="w-full"
+                            disabled={formState === "loading"}
+                        >
+                            {formState === "loading" && (
+                                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                            )}
+                            {formState === "loading" ? "Logging in" : "Log In"}
                         </Button>
-                        <Button variant="outline" className="w-full">
+                        <Button
+                            variant="outline"
+                            className="w-full"
+                            disabled={formState === "loading"}
+                        >
                             Log in with Google
                         </Button>
                     </div>
