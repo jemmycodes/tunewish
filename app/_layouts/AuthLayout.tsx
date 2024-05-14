@@ -13,8 +13,8 @@ import {
 
 interface CustomWrapperComponent {
     children: ReactNode
-    userType: "DJ" | "Listener"
-    action: "Log In" | "Sign Up"
+    userType: Roles
+    action: AuthActions
 }
 
 const AuthLayout = ({ children, userType, action }: CustomWrapperComponent) => {

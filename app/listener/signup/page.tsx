@@ -10,7 +10,7 @@ import { ReloadIcon } from "@radix-ui/react-icons"
 import { FormFieldContainer } from "@/app/_components"
 
 const ListenerSignup = () => {
-    const { onSubmit, form, formState } = useSignup(SignupSchema)
+    const { onSubmit, form, formState } = useSignup(SignupSchema, "Listener")
 
     return (
         <AuthLayout userType="Listener" action="Sign Up">
@@ -25,13 +25,13 @@ const ListenerSignup = () => {
                                 label="Firstname"
                                 form={form}
                                 placeholder="John"
-                                name="firstName"
+                                name="firstname"
                             />
                             <FormFieldContainer
                                 label="Lastname"
                                 form={form}
                                 placeholder="Doe"
-                                name="lastName"
+                                name="lastname"
                             />
                         </div>
                         <FormFieldContainer

@@ -2,9 +2,9 @@ import { z } from "zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { LoginSchema } from "@/utils/schema"
-import { loginAsDJ } from "@/supabase/serverActions"
+import { logIn } from "@/supabase/serverActions"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { toast, useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast"
 
 const useLogin = (schema: z.ZodSchema<any>) => {
     const { toast } = useToast()
@@ -24,8 +24,7 @@ const useLogin = (schema: z.ZodSchema<any>) => {
             description: "Please wait while we log you in",
         })
 
-        const { data, error } = await loginAsDJ(values)
-
+        const { data, error } = await logIn(values)
         if (error) {
             toast({
                 title: "Error",
