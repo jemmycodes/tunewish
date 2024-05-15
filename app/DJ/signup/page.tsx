@@ -68,13 +68,6 @@ const DJSignup = () => {
                                 ? "Creating Account"
                                 : "Sign Up"}
                         </Button>
-                        <Button
-                            variant="outline"
-                            className="w-full"
-                            disabled={formState === "loading"}
-                        >
-                            Sign Up with Google
-                        </Button>
                     </div>
                     <div className="mt-4 text-center text-sm">
                         Have an account?{" "}

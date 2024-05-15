@@ -19,7 +19,10 @@ export const signUp = async (
     console.log(fields, metadata, role)
     const { data, error } = await supabase.auth.signUp({
         ...fields,
-        options: { data: { ...metadata, role } },
+        options: {
+            data: { ...metadata, role },
+            emailRedirectTo: `${location.origin}/auth/confirm`,
+        },
     })
     return { data, error }
 }

@@ -1,6 +1,5 @@
 import { cookies } from "next/headers"
 import { createBrowserClient } from "@supabase/ssr"
-import { createClient } from "@supabase/supabase-js"
 import { createServerClient, type CookieOptions } from "@supabase/ssr"
 
 export const supabaseBrowserClient = () =>
