@@ -6,12 +6,12 @@ import { AuthLayout } from "@/app/_layouts"
 import { Form } from "@/components/ui/form"
 import { LoginSchema } from "@/utils/schema"
 import { Button } from "@/components/ui/button"
-import { FormFieldContainer } from "@/app/_components"
 import { ReloadIcon } from "@radix-ui/react-icons"
+import { getUrl } from "@/utils/functions"
+import { FormFieldContainer } from "@/app/_components"
 
-const DJLogin = () => {
+const ListenerLogin = () => {
     const { onSubmit, form, formState } = useLogin(LoginSchema)
-
     return (
         <AuthLayout action="Log In" userType="Listener">
             <Form {...form}>
@@ -56,4 +56,4 @@ const DJLogin = () => {
     )
 }
 
-export default DJLogin
+export default ListenerLogin

@@ -1,5 +1,5 @@
+import { getUrl } from "@/utils/functions"
 import { createClient } from "@supabase/supabase-js"
-import { Metadata } from "next"
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -16,13 +16,13 @@ export const signUp = async (
     role: Roles,
     metadata: Metadata,
 ) => {
-    console.log(fields, metadata, role)
     const { data, error } = await supabase.auth.signUp({
         ...fields,
         options: {
             data: { ...metadata, role },
-            emailRedirectTo: `${location.origin}/auth/confirm`,
+            emailRedirectTo: getUrl(),
         },
     })
+
     return { data, error }
 }
