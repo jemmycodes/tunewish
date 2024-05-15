@@ -71,7 +71,7 @@ const ListenerSignup = () => {
                     </div>
                     <div className="mt-4 text-center text-sm">
                         Have an account?{" "}
-                        <Link href={`/listener/login`} className="underline">
+                        <Link href={`/Listener/login`} className="underline">
                             Log in
                         </Link>
                     </div>

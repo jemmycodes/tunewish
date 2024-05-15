@@ -36,7 +36,7 @@ const AuthLayout = ({ children, userType, action }: CustomWrapperComponent) => {
                         className="text-right"
                         href={
                             userType === "DJ"
-                                ? `/listener/${action.toLowerCase().split(" ").join("")}`
+                                ? `/Listener/${action.toLowerCase().split(" ").join("")}`
                                 : `/DJ/${action.toLowerCase().split(" ").join("")}`
                         }
                     >

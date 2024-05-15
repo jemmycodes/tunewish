@@ -17,7 +17,7 @@ const actionCardData = [
         description:
             "Play your favorite music and request songs from the DJ without leaving your seat",
         image: PeoplePartying,
-        link: "/listener/login",
+        link: "/Listener/login",
     },
 ]
 
