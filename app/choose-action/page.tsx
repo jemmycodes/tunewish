@@ -1,6 +1,9 @@
+"use client"
+
 import Link from "next/link"
-import bgImage from "@/public/choose-action-bg.jpg"
+import { useState } from "react"
 import DJDeck from "@/public/dj-deck.jpg"
+import bgImage from "@/public/choose-action-bg.jpg"
 import Image, { StaticImageData } from "next/image"
 import PeoplePartying from "@/public/people-party.jpg"
 
@@ -10,14 +13,14 @@ const actionCardData = [
         description:
             "Fine tune your playlist to match your audience taste without leaving your stand",
         image: DJDeck,
-        link: "/DJ/login",
+        link: "/account/DJ/signup",
     },
     {
         title: "Listener",
         description:
             "Play your favorite music and request songs from the DJ without leaving your seat",
         image: PeoplePartying,
-        link: "/Listener/login",
+        link: "/account/Listener/signup",
     },
 ]
 
@@ -58,8 +61,13 @@ interface ActionCardsProps {
 }
 
 const ActionCards = ({ title, image, description, link }: ActionCardsProps) => {
+    const handleUserAction = () => {
+        localStorage.setItem("role", title)
+    }
+
     return (
         <Link
+            onClick={handleUserAction}
             href={link}
             className="mx-auto flex max-w-sm flex-col gap-2 rounded-2xl bg-[#101010]  shadow-lg backdrop-blur-2xl"
         >
@@ -67,8 +75,6 @@ const ActionCards = ({ title, image, description, link }: ActionCardsProps) => {
                 src={image}
                 alt={title}
                 className="aspect-video h-48 w-full rounded-t-2xl object-cover"
-                height={100}
-                width={100}
             />
             <hgroup className="flex flex-col items-center justify-center gap-2 px-5 py-5">
                 <p className=" text-2xl font-semibold">{title}</p>

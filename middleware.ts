@@ -1,20 +1,25 @@
 import { updateSession } from "@/supabase/middleware"
 import { NextRequest, NextResponse } from "next/server"
 
-const protectedPages = [
-    "/DJ/Home",
-    "/Listener/Home",
-    "/forgot-password/new-password",
-]
+const protectedPages = ["/DJ/Home", "/Listener/Home", "/account/reset-password"]
 
 export async function middleware(request: NextRequest) {
     const { user, response } = await updateSession(request)
 
+    console.log(user)
+
+    console.log(
+        user,
+        !user && protectedPages.includes(request.nextUrl.pathname),
+        protectedPages.includes(request.nextUrl.pathname),
+        request.nextUrl.pathname,
+    )
+
     if (!user && protectedPages.includes(request.nextUrl.pathname)) {
-        NextResponse.redirect(new URL("/choose-action", request.url))
-        return response
+        return NextResponse.redirect(new URL("/choose-action", request.url))
     }
 
+    console.log(response)
     return response
 }
 
