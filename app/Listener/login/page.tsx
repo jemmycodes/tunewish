@@ -1,16 +1,17 @@
 "use client"
 
 import Link from "next/link"
-import { useLogin } from "@/app/hooks"
 import { AuthLayout } from "@/app/_layouts"
 import { Form } from "@/components/ui/form"
 import { LoginSchema } from "@/utils/schema"
 import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { getUrl } from "@/utils/functions"
 import { FormFieldContainer } from "@/app/_components"
+import { useLogin, usePasswordVisibility } from "@/app/hooks"
 
 const ListenerLogin = () => {
+    const { icon, type } = usePasswordVisibility()
+
     const { onSubmit, form, formState } = useLogin(LoginSchema)
     return (
         <AuthLayout action="Log In" userType="Listener">
@@ -21,6 +22,7 @@ const ListenerLogin = () => {
                 >
                     <div className="grid gap-4">
                         <FormFieldContainer
+                            type="email"
                             label="Email"
                             form={form}
                             placeholder="johndoe@tunewish.co.uk"
@@ -28,6 +30,8 @@ const ListenerLogin = () => {
                         />
 
                         <FormFieldContainer
+                            icon={icon}
+                            type={type}
                             label="Password"
                             form={form}
                             name="password"

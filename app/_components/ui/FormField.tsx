@@ -5,20 +5,25 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
+import { ReactNode } from "react"
 import { Input } from "@/components/ui/input"
 
 interface FormFieldProps {
     form: any
     name: string
+    type?: string
+    icon?: ReactNode
     label: string
     placeholder?: string
 }
 
 const FormFieldContainer = ({
     form,
+    type,
+    icon,
+    name,
     label,
     placeholder,
-    name,
 }: FormFieldProps) => {
     return (
         <FormField
@@ -28,7 +33,14 @@ const FormFieldContainer = ({
                 <FormItem>
                     <FormLabel>{label}</FormLabel>
                     <FormControl>
-                        <Input placeholder={placeholder} {...field} />
+                        <div className="relative">
+                            <Input
+                                placeholder={placeholder}
+                                {...field}
+                                type={type}
+                            />
+                            {icon}
+                        </div>
                     </FormControl>
                     <FormMessage />
                 </FormItem>

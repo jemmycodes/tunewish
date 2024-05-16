@@ -7,9 +7,11 @@ import { Form } from "@/components/ui/form"
 import { LoginSchema } from "@/utils/schema"
 import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
+import { usePasswordVisibility } from "@/app/hooks"
 import { FormFieldContainer } from "@/app/_components"
 
 const DJLogin = () => {
+    const { icon, type } = usePasswordVisibility()
     const { onSubmit, form, formState } = useLogin(LoginSchema)
 
     return (
@@ -23,6 +25,7 @@ const DJLogin = () => {
                         <FormFieldContainer
                             label="Email"
                             form={form}
+                            type="email"
                             placeholder="johndoe@tunewish.co.uk"
                             name="email"
                         />
@@ -31,8 +34,15 @@ const DJLogin = () => {
                             label="Password"
                             form={form}
                             name="password"
+                            icon={icon}
+                            type={type}
                         />
-
+                        <Link
+                            href="/forgot-password"
+                            className="text-right text-xs underline"
+                        >
+                            Forgot Password?
+                        </Link>
                         <Button
                             type="submit"
                             className="w-full"

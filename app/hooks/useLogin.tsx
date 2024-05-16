@@ -13,9 +13,7 @@ const useLogin = (schema: z.ZodSchema<any>) => {
         resolver: zodResolver(LoginSchema),
     })
 
-    const [formState, setFormState] = useState<
-        "idle" | "loading" | "error" | "success"
-    >("idle")
+    const [formState, setFormState] = useState<FormState>("idle")
 
     const onSubmit = async (values: z.infer<typeof schema>) => {
         setFormState("loading")

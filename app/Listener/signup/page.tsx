@@ -1,15 +1,18 @@
 "use client"
 
 import Link from "next/link"
-import { useSignup } from "@/app/hooks"
 import { AuthLayout } from "@/app/_layouts"
 import { Form } from "@/components/ui/form"
 import { SignupSchema } from "@/utils/schema"
 import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { FormFieldContainer } from "@/app/_components"
+import { usePasswordVisibility, useSignup } from "@/app/hooks"
 
 const ListenerSignup = () => {
+    const passwordVisibility = usePasswordVisibility()
+    const confirmPasswordVisibility = usePasswordVisibility()
+
     const { onSubmit, form, formState } = useSignup(SignupSchema, "Listener")
 
     return (
@@ -37,6 +40,7 @@ const ListenerSignup = () => {
                         <FormFieldContainer
                             label="Email"
                             form={form}
+                            type="email"
                             placeholder="johndoe@tunewish.co.uk"
                             name="email"
                         />
@@ -47,14 +51,20 @@ const ListenerSignup = () => {
                             name="username"
                         />
                         <FormFieldContainer
+                            key="password"
                             label="Password"
                             form={form}
                             name="password"
+                            icon={passwordVisibility.icon}
+                            type={passwordVisibility.type}
                         />
                         <FormFieldContainer
+                            key="confirmPassword"
                             label="Confirm Password"
                             form={form}
                             name="confirmPassword"
+                            icon={confirmPasswordVisibility.icon}
+                            type={confirmPasswordVisibility.type}
                         />
                         <Button
                             type="submit"

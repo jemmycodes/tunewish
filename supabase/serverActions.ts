@@ -26,3 +26,19 @@ export const signUp = async (
 
     return { data, error }
 }
+
+export const forgotPassword = async (email: string) => {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${getUrl()}/forgot-password/new-password`,
+    })
+
+    return { data, error }
+}
+
+export const updatePassword = async (password: string) => {
+    const { data, error } = await supabase.auth.updateUser({
+        password,
+    })
+
+    return { data, error }
+}
