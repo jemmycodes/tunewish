@@ -18,7 +18,6 @@ import { usePasswordVisibility } from "@/app/hooks"
 import { NewPasswordSchema } from "@/utils/schema"
 import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ForgotPasswordLayout } from "@/app/_layouts"
 import { FormFieldContainer } from "@/app/_components"
 import { updatePassword } from "@/supabase/serverActions"
 
