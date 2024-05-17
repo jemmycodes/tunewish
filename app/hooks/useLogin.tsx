@@ -2,7 +2,7 @@ import { z } from "zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { LoginSchema } from "@/utils/schema"
-import { logIn } from "@/supabase/serverActions"
+import { logIn } from "@/supabase/client/authFunctions"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useToast } from "@/components/ui/use-toast"
 

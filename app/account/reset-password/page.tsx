@@ -8,22 +8,34 @@ import {
     Card,
     CardContent,
 } from "@/components/ui/card"
-import { useState } from "react"
 import { useForm } from "react-hook-form"
+import { useEffect, useState } from "react"
 import { Form } from "@/components/ui/form"
 import { useRouter } from "next/navigation"
+import { supabase } from "@/supabase/client"
 import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { usePasswordVisibility } from "@/app/hooks"
 import { NewPasswordSchema } from "@/utils/schema"
+import { usePasswordVisibility } from "@/app/hooks"
 import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FormFieldContainer } from "@/app/_components"
-import { updatePassword } from "@/supabase/serverActions"
+import { updatePassword } from "@/supabase/client/authFunctions"
 
 const ResetPassword = () => {
-    const { toast } = useToast()
     const router = useRouter()
+
+    useEffect(() => {
+        supabase.auth.onAuthStateChange(async (event, session) => {
+            console.log(event, session)
+
+            if (!session) {
+                router.push("/account/forgot-password")
+            }
+        })
+    }, [])
+
+    const { toast } = useToast()
     const newPassword = usePasswordVisibility()
     const confirmPassword = usePasswordVisibility()
     const [formState, setFormState] = useState<FormState>("idle")
@@ -40,7 +52,7 @@ const ResetPassword = () => {
         setFormState("loading")
         toast({
             title: "Loading",
-            description: "Please wait while we send a confirmation mail...",
+            description: "Changing your password...",
         })
 
         const { data, error } = await updatePassword(newPassword)
@@ -60,7 +72,6 @@ const ResetPassword = () => {
                 description: "Redirecting...",
             })
             setFormState("idle")
-            router.push("/choose-action")
         }
     }
 

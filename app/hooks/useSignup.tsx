@@ -1,7 +1,7 @@
 import { z } from "zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { signUp } from "@/supabase/serverActions"
+import { signUp } from "@/supabase/client/authFunctions"
 import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 

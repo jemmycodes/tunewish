@@ -17,7 +17,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ForgotPasswordSchema } from "@/utils/schema"
 import { FormFieldContainer } from "@/app/_components"
-import { forgotPassword } from "@/supabase/serverActions"
+import { forgotPassword } from "@/supabase/client/authFunctions"
 
 const ForgotPassword = () => {
     const { toast } = useToast()

@@ -1,3 +1,4 @@
+import Link from "next/link"
 import {
     Card,
     CardContent,
@@ -5,11 +6,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
-import { ReactNode } from "react"
 import { Form } from "@/components/ui/form"
-import { UseFormReturn } from "react-hook-form"
 import { FormFieldContainer } from "@/app/_components"
 import { Button } from "@/components/ui/button"
 
@@ -18,7 +15,6 @@ import { usePasswordVisibility, useSignup } from "@/app/hooks"
 import { SignupSchema } from "@/utils/schema"
 
 const Signup = ({ role }: { role: Roles }) => {
-    console.log(role)
     const passwordVisibility = usePasswordVisibility()
     const confirmPasswordVisibility = usePasswordVisibility()
     const { onSubmit, form, formState } = useSignup(SignupSchema, role)

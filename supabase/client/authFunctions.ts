@@ -1,10 +1,5 @@
 import { getUrl } from "@/utils/functions"
-import { createClient } from "@supabase/supabase-js"
-
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-)
+import { supabase } from "@/supabase/client"
 
 export const logIn = async (fields: AuthLoginFields) => {
     const { data, error } = await supabase.auth.signInWithPassword(fields)
@@ -25,12 +20,15 @@ export const signUp = async (
         },
     })
 
+    console.log(data, error)
+
     return { data, error }
 }
 
 export const forgotPassword = async (email: string) => {
+    console.log(getUrl(), "reset-password")
     const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${getUrl()}/forgot-password/new-password`,
+        redirectTo: `${getUrl()}account/reset-password`,
     })
 
     return { data, error }
