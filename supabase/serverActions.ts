@@ -16,6 +16,7 @@ export const signUp = async (
     role: Roles,
     metadata: Metadata,
 ) => {
+    console.log(getUrl())
     const { data, error } = await supabase.auth.signUp({
         ...fields,
         options: {

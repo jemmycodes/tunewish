@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     let next = searchParams.get("role") as Roles
 
     const redirectTo = request.nextUrl.clone()
-    redirectTo.pathname = `${next}/home`
+    redirectTo.pathname = `/account/${next}/home`
     redirectTo.searchParams.delete("token_hash")
     redirectTo.searchParams.delete("type")
     redirectTo.searchParams.delete("role")
