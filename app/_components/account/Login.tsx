@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import {
     Card,
@@ -49,7 +51,7 @@ const Login = ({ role }: { role: Roles }) => {
                                 type={type}
                             />
                             <Link
-                                href="/forgot-password"
+                                href="/account/forgot-password"
                                 className="text-right text-xs underline"
                             >
                                 Forgot Password?
