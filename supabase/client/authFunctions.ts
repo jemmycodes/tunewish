@@ -15,10 +15,10 @@ export const signUp = async (
         ...fields,
         options: {
             data: { role, ...metadata },
-            emailRedirectTo: `${getUrl()}auth/confirm`,
+            emailRedirectTo: `${getUrl()}`,
         },
     })
-
+    console.log(`${getUrl()}`)
     return { data, error }
 }
 
