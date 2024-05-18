@@ -26,10 +26,8 @@ const ResetPassword = () => {
     const router = useRouter()
 
     useEffect(() => {
-        supabase.auth.onAuthStateChange(async (event, session) => {
-            if (!session) {
-                router.push("/account/forgot-password")
-            }
+        supabase.auth.onAuthStateChange(async (_event, session) => {
+            !session && router.push("/account/forgot-password")
         })
         //     eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
