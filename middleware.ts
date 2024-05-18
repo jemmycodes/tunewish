@@ -1,21 +1,49 @@
 import { updateSession } from "@/supabase/server/middleware"
 import { NextRequest, NextResponse } from "next/server"
 
-const protectedPages: string[] = []
+const authPages = [
+    "/account/DJ/login",
+    "/choose-action",
+    "/account/DJ/signup",
+    "/account/DJ/forgot-password",
+    "/account/Listener/login",
+    "/choose-action",
+    "/account/Listener/signup",
+    "/account/Listener/forgot-password",
+]
+const protectedPages: string[] = ["/DJ/home", "/Listener/home"]
+
+const redirectWithHeaders = (
+    url: string,
+    request: NextRequest,
+    response: NextResponse,
+): NextResponse => {
+    let newResponse = response
+
+    const destinationUrl = new URL(url, request.url)
+    newResponse = NextResponse.redirect(destinationUrl, { status: 302 })
+
+    Object.keys(request.headers).forEach((key) => {
+        newResponse.headers.set(key, request.headers.get(key) as string)
+    })
+
+    return newResponse
+}
 
 export async function middleware(request: NextRequest) {
     const { user, response } = await updateSession(request)
 
     let newResponse = response
 
-    if (!user && protectedPages.includes(request.nextUrl.pathname)) {
-        const destinationUrl = new URL("/choose-action", request.url)
-        newResponse = NextResponse.redirect(destinationUrl, { status: 302 })
+    if (!user && protectedPages.includes(request.nextUrl.pathname))
+        newResponse = redirectWithHeaders("/choose-action", request, response)
 
-        Object.keys(request.headers).forEach((key) => {
-            newResponse.headers.set(key, request.headers.get(key) as string)
-        })
-    }
+    if (user && authPages.includes(request.nextUrl.pathname))
+        newResponse = redirectWithHeaders(
+            `/${user.user_metadata.role}/home`,
+            request,
+            response,
+        )
 
     return newResponse
 }

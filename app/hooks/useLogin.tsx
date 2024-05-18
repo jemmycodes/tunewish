@@ -1,13 +1,15 @@
 import { z } from "zod"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { LoginSchema } from "@/utils/schema"
-import { logIn } from "@/supabase/client/authFunctions"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useToast } from "@/components/ui/use-toast"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { logIn } from "@/supabase/client/authFunctions"
 
 const useLogin = (schema: z.ZodSchema<any>) => {
     const { toast } = useToast()
+    const router = useRouter()
 
     const form = useForm<z.infer<typeof schema>>({
         resolver: zodResolver(LoginSchema),
@@ -39,6 +41,7 @@ const useLogin = (schema: z.ZodSchema<any>) => {
                     "Logged in successfully, Please wait while we redirect you to your dashboard",
             })
             setFormState("success")
+            router.push(`/${data.user.user_metadata.role}/home`)
         }
         setFormState("idle")
     }

@@ -9,7 +9,6 @@ import {
     CardContent,
 } from "@/components/ui/card"
 import { useForm } from "react-hook-form"
-import { useEffect, useState } from "react"
 import { Form } from "@/components/ui/form"
 import { useRouter } from "next/navigation"
 import { supabase } from "@/supabase/client"
@@ -17,25 +16,38 @@ import { Button } from "@/components/ui/button"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { NewPasswordSchema } from "@/utils/schema"
 import { usePasswordVisibility } from "@/app/hooks"
+import { useEffect, useState, useRef } from "react"
 import { useToast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FormFieldContainer } from "@/app/_components"
 import { updatePassword } from "@/supabase/client/authFunctions"
 
 const ResetPassword = () => {
+    const { toast } = useToast()
     const router = useRouter()
+    const newPassword = usePasswordVisibility()
+    const confirmPassword = usePasswordVisibility()
+    const timeout = useRef<NodeJS.Timeout | null>(null)
+    const [formState, setFormState] = useState<FormState>("idle")
 
     useEffect(() => {
         supabase.auth.onAuthStateChange(async (_event, session) => {
-            !session && router.push("/account/forgot-password")
+            if (!session) {
+                toast({
+                    title: "Log in to access this page",
+                    description: `Redirecting in a few seconds...`,
+                })
+                timeout.current = setTimeout(() => {
+                    router.push("/account/forgot-password")
+                }, 2000)
+            }
         })
+
+        return () => {
+            timeout.current && clearTimeout(timeout.current)
+        }
         //     eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    const { toast } = useToast()
-    const newPassword = usePasswordVisibility()
-    const confirmPassword = usePasswordVisibility()
-    const [formState, setFormState] = useState<FormState>("idle")
 
     const form = useForm<z.infer<typeof NewPasswordSchema>>({
         resolver: zodResolver(NewPasswordSchema),
