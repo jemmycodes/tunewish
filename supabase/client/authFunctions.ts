@@ -11,16 +11,13 @@ export const signUp = async (
     role: Roles,
     metadata: Metadata,
 ) => {
-    console.log(getUrl())
     const { data, error } = await supabase.auth.signUp({
         ...fields,
         options: {
             data: { role, ...metadata },
-            emailRedirectTo: getUrl(),
+            emailRedirectTo: `${getUrl()}auth/confirm`,
         },
     })
-
-    console.log(data, error)
 
     return { data, error }
 }

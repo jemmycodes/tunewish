@@ -17,7 +17,6 @@ export async function middleware(request: NextRequest) {
         })
     }
 
-    console.log("User", newResponse, "hi")
     return newResponse
 }
 

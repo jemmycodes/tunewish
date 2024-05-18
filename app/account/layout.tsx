@@ -16,7 +16,6 @@ const AccountLayout = ({ children }: AccountLayoutProps) => {
 
     useEffect(() => {
         const role = localStorage.getItem("role")
-        console.log(role)
         if (!role) {
             toast({
                 title: "Error",
@@ -24,6 +23,7 @@ const AccountLayout = ({ children }: AccountLayoutProps) => {
             })
             router.push("/choose-action")
         }
+        //     eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

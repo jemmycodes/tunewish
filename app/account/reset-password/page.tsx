@@ -27,12 +27,11 @@ const ResetPassword = () => {
 
     useEffect(() => {
         supabase.auth.onAuthStateChange(async (event, session) => {
-            console.log(event, session)
-
             if (!session) {
                 router.push("/account/forgot-password")
             }
         })
+        //     eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const { toast } = useToast()

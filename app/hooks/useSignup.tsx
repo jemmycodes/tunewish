@@ -33,7 +33,6 @@ const useSignup = (schema: z.ZodSchema<any>, role: Roles) => {
                 title: "Error",
                 description: "An Error occurred. Please try again later",
             })
-            console.error(error)
             setFormState("error")
             return
         }
