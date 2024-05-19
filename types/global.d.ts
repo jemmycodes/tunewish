@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 declare global {
     interface AuthLoginFields {
         email: string
@@ -8,6 +10,10 @@ declare global {
         firstName: string
         lastname: string
         username: string
+    }
+
+    interface ChildrenPropType extends AuthLoginFields, Metadata {
+        children: ReactNode
     }
 
     type Roles = "DJ" | "Listener"

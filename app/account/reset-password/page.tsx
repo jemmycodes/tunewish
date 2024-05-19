@@ -39,7 +39,7 @@ const ResetPassword = () => {
                 })
                 timeout.current = setTimeout(() => {
                     router.push("/account/forgot-password")
-                }, 2000)
+                }, 1000)
             }
         })
 
