@@ -10,3 +10,10 @@ export const getUrl = () => {
 
     return url
 }
+
+export const getInitials = (firstname: string, lastname: string) => {
+    const lastInitial = lastname.charAt(0).toUpperCase()
+    const firstInitial = firstname.charAt(0).toUpperCase()
+
+    return `${firstInitial}${lastInitial}`
+}

@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import { Tables } from "@/types/supabase"
 
 declare global {
     interface AuthLoginFields {
@@ -11,6 +12,8 @@ declare global {
         lastname: string
         username: string
     }
+
+    type Profile = Tables["profiles"]["Row"]
 
     interface ChildrenPropType {
         children: ReactNode
