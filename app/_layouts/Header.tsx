@@ -1,5 +1,5 @@
-import { AvatarImage, Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { IoNotifications } from "react-icons/io5"
+import { AvatarImage, Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 const Header = () => {
     return (

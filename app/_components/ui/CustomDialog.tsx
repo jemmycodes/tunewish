@@ -59,10 +59,7 @@ const CustomDialog = ({ trigger }: CustomDialogProps) => {
             body: JSON.stringify(values),
         })
 
-        console.log(res)
-
         const data = await res.json()
-        console.log(data)
 
         if (!res.ok) {
             toast({
@@ -82,7 +79,9 @@ const CustomDialog = ({ trigger }: CustomDialogProps) => {
 
     return (
         <Dialog>
-            <DialogTrigger>{trigger}</DialogTrigger>
+            <DialogTrigger className="flex items-center gap-1 rounded bg-stone-50 px-4 py-2  text-stone-900 hover:bg-stone-50/90 ">
+                {trigger}
+            </DialogTrigger>
             <DialogContent className="m-4">
                 <DialogHeader>Create A Room</DialogHeader>
                 <DialogDescription>

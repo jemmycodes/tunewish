@@ -20,10 +20,10 @@ const Rooms = async () => {
                     <h3 className="text-xl font-bold">Rooms</h3>
                     <CustomDialog
                         trigger={
-                            <Button>
+                            <>
                                 <IoAdd className="mr-1 text-lg" />
                                 Create Room
-                            </Button>
+                            </>
                         }
                     />
                 </hgroup>

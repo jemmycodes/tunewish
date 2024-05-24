@@ -42,8 +42,6 @@ const RoomCard = ({
             .delete()
             .eq("room_id", room_id)
 
-        console.log(error)
-
         if (error) {
             toast({
                 title: `Cannot delete Room: ${name}!`,

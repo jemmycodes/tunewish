@@ -12,7 +12,7 @@ declare global {
         username: string
     }
 
-    interface ChildrenPropType extends AuthLoginFields, Metadata {
+    interface ChildrenPropType {
         children: ReactNode
     }
 
