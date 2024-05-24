@@ -1,8 +1,23 @@
-import { IoNotifications } from "react-icons/io5"
-import { AvatarImage, Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { GoAlert } from "react-icons/go"
 import { getInitials } from "@/utils/functions"
+import { IoNotifications } from "react-icons/io5"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { AvatarImage, Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 const Header = ({ userProfile }: Profile) => {
+    if (!userProfile) {
+        return (
+            <Alert variant="destructive" className="max-w-lg">
+                <GoAlert className="text-xl" />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>
+                    Your profile could not be loaded, refresh the page to try
+                    again
+                </AlertDescription>
+            </Alert>
+        )
+    }
+
     const { firstname, lastname, role, username } = userProfile
     const initials = getInitials(firstname, lastname)
 

@@ -1,5 +1,4 @@
 import { IoAdd } from "react-icons/io5"
-import { Button } from "@/components/ui/button"
 import RoomCard from "@/app/_components/ui/RoomCard"
 import { supabaseServerClient } from "@/supabase/server"
 import CustomDialog from "@/app/_components/ui/CustomDialog"
@@ -10,6 +9,7 @@ const Rooms = async () => {
     const { data: rooms, error } = await supabase.from("rooms").select("*")
 
     if (error) {
+        console.log(error, "rooms page")
         return <p>An error occurred</p>
     }
 
@@ -28,12 +28,12 @@ const Rooms = async () => {
                     />
                 </hgroup>
                 {rooms.length !== 0 ? (
-                    <div className="mlg:grid mlg:grid-cols-2 flex w-full flex-col gap-4 lg:grid lg:grid-cols-dashboard_cards">
+                    <div className="flex w-full flex-col gap-4 mlg:grid mlg:grid-cols-2 lg:grid lg:grid-cols-dashboard_cards">
                         {rooms?.map((room, index) => (
                             <RoomCard
                                 key={room.id}
                                 name={room.name}
-                                room_id={room.room_id}
+                                room_id={room.room_id.split("-")[0]}
                                 description={room.description}
                                 no_of_attendees={
                                     room.no_of_attendees || index * 2 + 3

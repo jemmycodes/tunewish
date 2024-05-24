@@ -1,5 +1,5 @@
 const Settings = () => {
-    return <div>Settings</div>
+    return <div className="w-full max-w-md">Settings</div>
 }
 
 export default Settings

@@ -4,14 +4,10 @@ import { supabaseServerClient } from "@/supabase/server"
 const Layout = async ({ children }: ChildrenPropType) => {
     const supabase = supabaseServerClient()
 
-    const { data: profiles, error } = await supabase
+    const { data: profiles } = await supabase
         .from("profiles")
         .select("*")
         .single()
-
-    if (error) {
-        return <p>An error occurred</p>
-    }
 
     return (
         <div className="min-h-screen grid-cols-dashboard bg-stone-950  md:grid">

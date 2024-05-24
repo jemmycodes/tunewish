@@ -1,10 +1,12 @@
 "use client"
 
 import Link from "next/link"
+import { supabase } from "@/supabase/client"
 import { GoHomeFill } from "react-icons/go"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { IoMdSettings } from "react-icons/io"
 import { IoLogOut, IoPlay } from "react-icons/io5"
+import { useToast } from "@/components/ui/use-toast"
 
 const navigationData = [
     {
@@ -25,7 +27,34 @@ const navigationData = [
 ]
 
 const Navigation = () => {
+    const { toast } = useToast()
+    const router = useRouter()
     const pathname = usePathname()
+
+    const handleLogout = async () => {
+        toast({
+            title: "Logging out...",
+            description: "Please wait while you're logged out...",
+        })
+
+        const { error } = await supabase.auth.signOut()
+
+        if (error) {
+            console.log(error)
+            toast({
+                title: "Error",
+                description: "An error occurred while logging out",
+            })
+            return
+        }
+
+        toast({
+            title: "Success",
+            description: "You have been logged out, redirecting you...",
+        })
+        localStorage.removeItem("role")
+        router.replace("/choose-action")
+    }
 
     return (
         <nav
@@ -52,7 +81,10 @@ const Navigation = () => {
                 ))}
             </ul>
             <div className=" self-stretch  py-3 pr-3 md:w-full md:border-t md:border-stone-700">
-                <button className="flex h-full w-full flex-col items-center gap-1 p-0 text-xs md:flex-row  md:uppercase md:tracking-widest">
+                <button
+                    onClick={handleLogout}
+                    className="flex h-full w-full flex-col items-center gap-1 p-0 text-xs md:flex-row  md:uppercase md:tracking-widest"
+                >
                     <IoLogOut className="text-xl text-stone-100" />
                     <span className="mt-1">Logout</span>
                 </button>
