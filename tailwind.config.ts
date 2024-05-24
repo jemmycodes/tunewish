@@ -18,6 +18,9 @@ const config = {
             },
         },
         extend: {
+            screens: {
+                mlg: "520px",
+            },
             backgroundImage: {
                 "purple-gradient":
                     "linear-gradient(180deg, #000000 0%, #200D42 34.22%, #4F21A1 64.9%, #A46EDB 81.78%)",
@@ -43,6 +46,7 @@ const config = {
             },
             gridTemplateColumns: {
                 dashboard: "200px 1fr",
+                dashboard_cards: "repeat(auto-fill, minmax(300px, 1fr))",
             },
         },
     },

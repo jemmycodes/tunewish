@@ -12,8 +12,9 @@ interface FormFieldProps {
     form: any
     name: string
     type?: string
-    icon?: ReactNode
     label: string
+    icon?: ReactNode
+    className?: string
     placeholder?: string
 }
 
@@ -23,6 +24,7 @@ const FormFieldContainer = ({
     icon,
     name,
     label,
+    className,
     placeholder,
 }: FormFieldProps) => {
     return (
@@ -35,6 +37,7 @@ const FormFieldContainer = ({
                     <FormControl>
                         <div className="relative">
                             <Input
+                                className={className}
                                 placeholder={placeholder}
                                 {...field}
                                 type={type}

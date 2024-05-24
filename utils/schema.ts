@@ -45,4 +45,18 @@ const NewPasswordSchema = z
         path: ["confirmPassword"], // path of error
     })
 
-export { LoginSchema, SignupSchema, ForgotPasswordSchema, NewPasswordSchema }
+const CreateRoomSchema = z.object({
+    location: z.string(),
+    message: z.string().optional(),
+    dress_code: z.string().optional(),
+    name: z.string().min(3).max(20),
+    description: z.string().min(10).max(500),
+})
+
+export {
+    LoginSchema,
+    SignupSchema,
+    ForgotPasswordSchema,
+    NewPasswordSchema,
+    CreateRoomSchema,
+}

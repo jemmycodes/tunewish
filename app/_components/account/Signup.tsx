@@ -7,12 +7,11 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Form } from "@/components/ui/form"
-import { FormFieldContainer } from "@/app/_components"
-import { Button } from "@/components/ui/button"
-
-import { ReloadIcon } from "@radix-ui/react-icons"
-import { usePasswordVisibility, useSignup } from "@/app/hooks"
 import { SignupSchema } from "@/utils/schema"
+import { Button } from "@/components/ui/button"
+import { ReloadIcon } from "@radix-ui/react-icons"
+import { FormFieldContainer } from "@/app/_components"
+import { usePasswordVisibility, useSignup } from "@/app/hooks"
 
 const Signup = ({ role }: { role: Roles }) => {
     const passwordVisibility = usePasswordVisibility()
