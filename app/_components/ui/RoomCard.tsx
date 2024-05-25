@@ -131,7 +131,7 @@ const RoomCard = ({
                         <div className="flex flex-col gap-2">
                             <p className="text-xs">Copy Room Link</p>
                             <span className="flex flex-col gap-4">
-                                <code className="text-wrap rounded-lg bg-stone-900 p-3 text-sm">
+                                <code className="rounded-lg bg-stone-900 p-3 text-xs">
                                     {roomLink}
                                 </code>
                                 <Button onClick={handleCopyRoomLink}>

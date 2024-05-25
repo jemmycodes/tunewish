@@ -33,7 +33,7 @@ const Rooms = async () => {
                             <RoomCard
                                 key={room.id}
                                 name={room.name}
-                                room_id={room.room_id.split("-")[0]}
+                                room_id={room.room_id}
                                 description={room.description}
                                 no_of_attendees={
                                     room.no_of_attendees || index * 2 + 3
