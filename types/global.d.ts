@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
 import { Tables } from "@/types/supabase"
+import Error from "@/app/rooms/error"
 
 declare global {
     interface AuthLoginFields {
@@ -11,6 +12,11 @@ declare global {
         firstName: string
         lastname: string
         username: string
+    }
+
+    interface ErrorProps {
+        error: Error & { digest?: string }
+        reset: () => void
     }
 
     type Profile = Tables["profiles"]["Row"]

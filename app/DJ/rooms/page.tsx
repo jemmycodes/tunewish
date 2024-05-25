@@ -9,8 +9,7 @@ const Rooms = async () => {
     const { data: rooms, error } = await supabase.from("rooms").select("*")
 
     if (error) {
-        console.log(error, "rooms page")
-        return <p>An error occurred</p>
+        throw new Error(error.message)
     }
 
     return (

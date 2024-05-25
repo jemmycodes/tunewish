@@ -19,12 +19,11 @@ import { MdDelete } from "react-icons/md"
 import { IoPeople, IoShareSocialSharp, IoCopyOutline } from "react-icons/io5"
 import {
     Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
     DialogTitle,
+    DialogHeader,
+    DialogContent,
     DialogTrigger,
+    DialogDescription,
 } from "@/components/ui/dialog"
 
 interface RoomCardProps {
@@ -104,7 +103,7 @@ const RoomCard = ({
                         href={`/rooms/${room_id}`}
                         className=" text-stone-100 underline"
                     >
-                        View More
+                        View Room
                     </Link>
                 </CardDescription>
             </CardContent>
@@ -140,7 +139,6 @@ const RoomCard = ({
                                 </Button>
                             </span>
                         </div>
-                        <DialogFooter></DialogFooter>
                     </DialogContent>
                 </Dialog>
             </CardFooter>
