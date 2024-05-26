@@ -1,11 +1,12 @@
 import { ReactNode } from "react"
+import { cookies } from "next/headers"
 import { GiClothes } from "react-icons/gi"
 import { IoPeople } from "react-icons/io5"
-import { supabase } from "@/supabase/client"
 import { Badge } from "@/components/ui/badge"
 import { AiFillMessage } from "react-icons/ai"
-import { Button } from "@/components/ui/button"
-import { FaArrowRight, FaLocationDot } from "react-icons/fa6"
+import { FaLocationDot } from "react-icons/fa6"
+import { createSupabaseServerComponent } from "@/supabase/server"
+import RoomDetailButton from "@/app/_components/ui/RoomDetailButton"
 
 interface RoomDetailsProps {
     params: {
@@ -14,6 +15,16 @@ interface RoomDetailsProps {
 }
 
 const RoomDetails = async ({ params }: RoomDetailsProps) => {
+    const cookie = cookies()
+
+    const supabase = createSupabaseServerComponent(cookie)
+
+    const {
+        data: { user },
+    } = await supabase.auth.getUser()
+
+    const role = user?.user_metadata.role
+
     const { data: room, error } = await supabase
         .from("rooms")
         .select(
@@ -75,9 +86,13 @@ const RoomDetails = async ({ params }: RoomDetailsProps) => {
                         detail={room.no_of_attendees?.toString()}
                     />
                 </ul>
-                <Button>
-                    Join Room <FaArrowRight className="ml-2" />
-                </Button>
+
+                <RoomDetailButton
+                    role={role}
+                    text="Join Room"
+                    room_id={params.slug}
+                    listener_id={user?.id}
+                />
             </main>
         </>
     )

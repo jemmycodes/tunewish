@@ -18,6 +18,8 @@ export const signUp = async (
             emailRedirectTo: `${getUrl()}`,
         },
     })
+
+    console.log(data, error, fields, role)
     return { data, error }
 }
 
