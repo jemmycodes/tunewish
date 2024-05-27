@@ -52,7 +52,7 @@ const CustomDialog = ({ trigger }: CustomDialogProps) => {
         resolver: zodResolver(CreateRoomSchema),
     })
 
-    const onSubmit = async (values: any) => {
+    const onSubmit = async (values: z.infer<typeof CreateRoomSchema>) => {
         setFormState("loading")
         const res = await fetch(`${location.origin}/api/DJ/create-room`, {
             method: "POST",

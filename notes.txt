@@ -1,0 +1,24 @@
+ LISTENERS ROOM DATA
+
+ [
+     {
+         id: 10,
+         created_at: '2024-05-26T22:43:47.392975+00:00',
+         listener_id: '3e001ee6-7dbb-45a5-bfec-a5cbe0f745e6',
+         room_id: '61a6fae6-7e70-4fae-b96a-613b10c64e65',
+         is_active: true,
+         rooms: {
+             id: 41,
+             name: 'Sign Out Party',
+             dj_id: '9163ecf6-4628-4d6e-9231-2d898582213d',
+             message: 'Strictly by invitation, make sure to get your tickets and no plus one',
+             room_id: '61a6fae6-7e70-4fae-b96a-613b10c64e65',
+             location: 'School Campus',
+             created_at: '2024-05-24T10:56:20.098797',
+             dress_code: 'Dress fly, No purple Allowed',
+             description: 'Celebrate in style with vibrant decor, cozy seating, and a lively dance floor. Enjoy a variety of refreshments and capture memories at the photo booth. Join us as we toast to new beginnings and cherished memories!'
+         }
+     }
+ ]
+
+npx supabase gen types typescript --project-id ogosuhzzuolglotuptfa --schema public > types/supabase.ts

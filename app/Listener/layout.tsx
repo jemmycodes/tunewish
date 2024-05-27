@@ -1,4 +1,4 @@
-import { Header, Navigation } from "@/app/_layouts"
+import { Header } from "@/app/_layouts"
 import { Toaster } from "@/components/ui/sonner"
 import { supabaseServerClient } from "@/supabase/server"
 
@@ -13,11 +13,12 @@ const Layout = async ({ children }: ChildrenPropType) => {
     return (
         <>
             <Toaster />
-            <div className="min-h-screen grid-cols-dashboard bg-stone-950  md:grid">
-                <Navigation />
+            <div className="min-h-screen  bg-stone-950  ">
+                {/*<Navigation />*/}
                 <div className="mx-6 my-2 ">
                     <Header userProfile={profiles} />
                     <main className="relative my-5 w-full space-y-7 overflow-hidden ">
+                        <h1 className="text-lg font-bold">Rooms</h1>
                         {children}
                     </main>
                 </div>

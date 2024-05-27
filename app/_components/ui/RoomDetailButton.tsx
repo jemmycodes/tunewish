@@ -9,14 +9,12 @@ import { ReloadIcon } from "@radix-ui/react-icons"
 
 interface RoomDetailButtonProps {
     role: Roles
-    text: string
     room_id: string
-    listener_id: string
+    listener_id: string | undefined
 }
 
 const RoomDetailButton = ({
     role,
-    text,
     room_id,
     listener_id,
 }: RoomDetailButtonProps) => {
@@ -63,12 +61,12 @@ const RoomDetailButton = ({
         <Button onClick={handleStartRoom} disabled={formState === "loading"}>
             {formState === "loading" ? (
                 <>
-                    Joining Room
-                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                    Starting Session
+                    <ReloadIcon className="ml-2 h-4 w-4 animate-spin" />
                 </>
             ) : (
                 <>
-                    {text}
+                    Start Session
                     <FaArrowRight className="ml-2" />
                 </>
             )}
@@ -77,12 +75,12 @@ const RoomDetailButton = ({
         <Button onClick={handleJoinRoom} disabled={formState === "loading"}>
             {formState === "loading" ? (
                 <>
-                    Starting Session
-                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                    Joining Room
+                    <ReloadIcon className="ml-2 h-4 w-4 animate-spin" />
                 </>
             ) : (
                 <>
-                    {text}
+                    Join Room
                     <FaArrowRight className="ml-2" />
                 </>
             )}

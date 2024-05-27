@@ -18,7 +18,7 @@ export type Database = {
                 }
                 Insert: {
                     created_at?: string
-                    dj_id: string
+                    dj_id?: string
                     id?: number
                     username: string
                 }
@@ -32,7 +32,7 @@ export type Database = {
                     {
                         foreignKeyName: "dj_dj_id_fkey"
                         columns: ["dj_id"]
-                        isOneToOne: false
+                        isOneToOne: true
                         referencedRelation: "users"
                         referencedColumns: ["id"]
                     },
@@ -42,38 +42,77 @@ export type Database = {
                 Row: {
                     created_at: string
                     id: number
-                    room_id: number | null
-                    user_id: string
+                    listener_id: string | null
+                    room_id: string | null
                     username: string
                 }
                 Insert: {
                     created_at?: string
                     id?: number
-                    room_id?: number | null
-                    user_id: string
+                    listener_id?: string | null
+                    room_id?: string | null
                     username: string
                 }
                 Update: {
                     created_at?: string
                     id?: number
-                    room_id?: number | null
-                    user_id?: string
+                    listener_id?: string | null
+                    room_id?: string | null
                     username?: string
                 }
                 Relationships: [
                     {
-                        foreignKeyName: "listeners_room_id_fkey"
-                        columns: ["room_id"]
-                        isOneToOne: false
-                        referencedRelation: "rooms"
+                        foreignKeyName: "listener_listener_id_fkey"
+                        columns: ["listener_id"]
+                        isOneToOne: true
+                        referencedRelation: "users"
                         referencedColumns: ["id"]
                     },
                     {
-                        foreignKeyName: "listeners_user_id_fkey"
-                        columns: ["user_id"]
+                        foreignKeyName: "listener_room_id_fkey"
+                        columns: ["room_id"]
                         isOneToOne: false
-                        referencedRelation: "users"
-                        referencedColumns: ["id"]
+                        referencedRelation: "rooms"
+                        referencedColumns: ["room_id"]
+                    },
+                ]
+            }
+            listeners_room: {
+                Row: {
+                    created_at: string
+                    id: number
+                    is_active: boolean | null
+                    listener_id: string | null
+                    room_id: string | null
+                }
+                Insert: {
+                    created_at?: string
+                    id?: number
+                    is_active?: boolean | null
+                    listener_id?: string | null
+                    room_id?: string | null
+                }
+                Update: {
+                    created_at?: string
+                    id?: number
+                    is_active?: boolean | null
+                    listener_id?: string | null
+                    room_id?: string | null
+                }
+                Relationships: [
+                    {
+                        foreignKeyName: "listeners_room_listener_id_fkey"
+                        columns: ["listener_id"]
+                        isOneToOne: false
+                        referencedRelation: "listeners"
+                        referencedColumns: ["listener_id"]
+                    },
+                    {
+                        foreignKeyName: "listeners_room_room_id_fkey"
+                        columns: ["room_id"]
+                        isOneToOne: false
+                        referencedRelation: "rooms"
+                        referencedColumns: ["room_id"]
                     },
                 ]
             }
@@ -85,8 +124,8 @@ export type Database = {
                     id: number
                     lastname: string
                     role: string
-                    rooms_joined: number
                     user_id: string
+                    username: string
                 }
                 Insert: {
                     created_at?: string
@@ -95,8 +134,8 @@ export type Database = {
                     id?: number
                     lastname: string
                     role: string
-                    rooms_joined: number
-                    user_id: string
+                    user_id?: string
+                    username: string
                 }
                 Update: {
                     created_at?: string
@@ -105,14 +144,14 @@ export type Database = {
                     id?: number
                     lastname?: string
                     role?: string
-                    rooms_joined?: number
                     user_id?: string
+                    username?: string
                 }
                 Relationships: [
                     {
-                        foreignKeyName: "roles_user_id_fkey"
+                        foreignKeyName: "profile_user_id_fkey"
                         columns: ["user_id"]
-                        isOneToOne: true
+                        isOneToOne: false
                         referencedRelation: "users"
                         referencedColumns: ["id"]
                     },
@@ -121,21 +160,36 @@ export type Database = {
             rooms: {
                 Row: {
                     created_at: string
-                    dj_id: number | null
+                    description: string
+                    dj_id: string | null
+                    dress_code: string | null
                     id: number
-                    name: string | null
+                    location: string
+                    message: string | null
+                    name: string
+                    room_id: string
                 }
                 Insert: {
                     created_at?: string
-                    dj_id?: number | null
+                    description: string
+                    dj_id?: string | null
+                    dress_code?: string | null
                     id?: number
-                    name?: string | null
+                    location?: string
+                    message?: string | null
+                    name: string
+                    room_id?: string
                 }
                 Update: {
                     created_at?: string
-                    dj_id?: number | null
+                    description?: string
+                    dj_id?: string | null
+                    dress_code?: string | null
                     id?: number
-                    name?: string | null
+                    location?: string
+                    message?: string | null
+                    name?: string
+                    room_id?: string
                 }
                 Relationships: [
                     {
@@ -143,36 +197,7 @@ export type Database = {
                         columns: ["dj_id"]
                         isOneToOne: false
                         referencedRelation: "dj"
-                        referencedColumns: ["id"]
-                    },
-                ]
-            }
-            users_role: {
-                Row: {
-                    created_at: string
-                    id: number
-                    role: string
-                    user_id: string | null
-                }
-                Insert: {
-                    created_at?: string
-                    id?: number
-                    role: string
-                    user_id?: string | null
-                }
-                Update: {
-                    created_at?: string
-                    id?: number
-                    role?: string
-                    user_id?: string | null
-                }
-                Relationships: [
-                    {
-                        foreignKeyName: "users_role_user_id_fkey"
-                        columns: ["user_id"]
-                        isOneToOne: false
-                        referencedRelation: "users"
-                        referencedColumns: ["id"]
+                        referencedColumns: ["dj_id"]
                     },
                 ]
             }

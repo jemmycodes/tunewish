@@ -12,17 +12,17 @@ const navigationData = [
     {
         title: "Home",
         icon: <GoHomeFill className="text-xl " />,
-        path: "home",
+        path: "/DJ",
     },
     {
         title: "Rooms",
         icon: <IoPlay className="text-xl " />,
-        path: "rooms",
+        path: "/DJ/rooms",
     },
     {
         title: "Settings",
         icon: <IoMdSettings className="text-xl " />,
-        path: "settings",
+        path: "/DJ/settings",
     },
 ]
 
@@ -70,9 +70,11 @@ const Navigation = () => {
                     <li key={index + item.title} className="w-full self-start">
                         <Link
                             href={item.path}
-                            className={`flex w-full flex-col items-center justify-center py-3 text-xs
-                             text-stone-100 md:flex-row md:items-start md:justify-start md:gap-2 md:uppercase md:tracking-widest
-                             ${pathname.includes(item.path) ? "rounded-full bg-blue-700 p-3 md:rounded" : ""}   `}
+                            className={`hover: flex
+                            w-full
+                            flex-col items-center justify-center py-3 text-xs text-stone-100
+                             hover:text-stone-400 md:flex-row md:items-start md:justify-start md:gap-2 md:uppercase md:tracking-widest
+                             ${pathname.includes(item.path) ? "text-2xl font-bold text-blue-500 " : ""}   `}
                         >
                             {item.icon}
                             <span className="mt-1">{item.title}</span>

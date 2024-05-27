@@ -1,12 +1,15 @@
 import { ReactNode } from "react"
 import { Tables } from "@/types/supabase"
 import Error from "@/app/rooms/error"
+import { getRedirectTypeFromError } from "next/dist/client/components/redirect"
 
 declare global {
     interface AuthLoginFields {
         email: string
         password: string
     }
+
+    type RoomStatus = "pending" | "in session" | "finished"
 
     interface Metadata {
         firstName: string
@@ -20,6 +23,8 @@ declare global {
     }
 
     type Profile = Tables["profiles"]["Row"]
+    type RoomType = Tables["rooms"]["Row"]
+    type ListenerRoomProps = Tables["listeners_room"]["Row"]
 
     interface ChildrenPropType {
         children: ReactNode

@@ -45,6 +45,8 @@ export async function middleware(request: NextRequest) {
             response,
         )
 
+    console.log(user)
+
     return newResponse
 }
 

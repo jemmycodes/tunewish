@@ -64,10 +64,9 @@ const RoomDetails = async ({ params }: RoomDetailsProps) => {
             <main className="mx-auto max-w-3xl space-y-6 p-4">
                 <Badge variant="outline">
                     <span
-                        className={`p-1 ${!room.status ? "bg-orange-600" : "animate-ping bg-green-600"} mr-2  rounded-full`}
+                        className={`p-1 ${room.status === "pending" ? "bg-orange-600" : room.status === "in session" ? "bg-green-600" : "bg-red-600"} mr-2  rounded-full`}
                     ></span>
-
-                    {!room.status ? "Yet to start" : "Currently in Session"}
+                    <p className="capitalize">{room.status}</p>
                 </Badge>
                 <p className="text-sm text-stone-400">{room.description}</p>
                 <ul className="space-y-3">
@@ -89,7 +88,6 @@ const RoomDetails = async ({ params }: RoomDetailsProps) => {
 
                 <RoomDetailButton
                     role={role}
-                    text="Join Room"
                     room_id={params.slug}
                     listener_id={user?.id}
                 />
