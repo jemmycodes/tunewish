@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
     const type = searchParams.get("type") as EmailOtpType | null
 
     // Create redirect link without the secret token
-    redirectTo.pathname = `/${role}/home/`
+    redirectTo.pathname = `/${role}`
     redirectTo.searchParams.delete("role")
     redirectTo.searchParams.delete("type")
     redirectTo.searchParams.delete("token_hash")

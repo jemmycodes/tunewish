@@ -1,43 +1,52 @@
-import { IoPeople } from "react-icons/io5"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { IoAdd } from "react-icons/io5"
+import RoomCard from "@/app/_components/ui/RoomCard"
+import { supabaseServerClient } from "@/supabase/server"
+import CustomDialog from "@/app/_components/ui/CustomDialog"
 
-const DJHome = () => {
+const Rooms = async () => {
+    const supabase = supabaseServerClient()
+
+    const { data: rooms, error } = await supabase.from("rooms").select("*")
+    // .eq("dj_id", "1")
+
+    if (error) {
+        throw new Error(error.message)
+    }
+
     return (
         <>
-            <section className="relative space-y-4">
-                <hgroup className="flex flex-col gap-1">
-                    <h3 className="text-xl font-bold"> Rooms Overview</h3>
+            <section className="relative w-full space-y-4">
+                <hgroup className="flex items-center justify-between gap-1">
+                    <h3 className="text-xl font-bold">Rooms</h3>
+                    <CustomDialog
+                        trigger={
+                            <>
+                                <IoAdd className="mr-1 text-lg" />
+                                Create Room
+                            </>
+                        }
+                    />
                 </hgroup>
-                <div className="flex flex-wrap gap-4">
-                    <OverviewRoomCard title="Room 1" no_of_attendees={5} />
-                </div>
+                {rooms.length !== 0 ? (
+                    <div className="flex w-full flex-col gap-4 mlg:grid mlg:grid-cols-2 lg:grid lg:grid-cols-dashboard_cards">
+                        {rooms?.map((room, index) => (
+                            <RoomCard
+                                key={room.id}
+                                name={room.name}
+                                room_id={room.room_id}
+                                description={room.description}
+                                no_of_attendees={
+                                    room.no_of_attendees || index * 2 + 3
+                                }
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-lg">No Rooms Available!</p>
+                )}
             </section>
         </>
     )
 }
 
-export default DJHome
-
-interface OverviewRoomCardProps {
-    title: string
-    no_of_attendees: number
-}
-
-const OverviewRoomCard = ({
-    title,
-    no_of_attendees,
-}: OverviewRoomCardProps) => {
-    return (
-        <Card className="  flex w-full max-w-60 flex-col justify-between backdrop-blur-md dark:bg-stone-800/50">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-lg font-medium">{title}</CardTitle>
-            </CardHeader>
-            <CardContent className="">
-                <span className="flex items-center gap-2">
-                    <IoPeople />
-                    <p className="text-sm">{no_of_attendees}</p>
-                </span>
-            </CardContent>
-        </Card>
-    )
-}
+export default Rooms

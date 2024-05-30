@@ -1,7 +1,6 @@
 import { ReactNode } from "react"
-import { Tables } from "@/types/supabase"
 import Error from "@/app/rooms/error"
-import { getRedirectTypeFromError } from "next/dist/client/components/redirect"
+import { Tables } from "@/types/supabase"
 
 declare global {
     interface AuthLoginFields {
@@ -9,7 +8,14 @@ declare global {
         password: string
     }
 
+    type Roles = "DJ" | "Listener"
+    type RoomType = Tables["rooms"]["Row"]
+    type AuthActions = "Log In" | "Sign Up"
+    type Profile = Tables["profiles"]["Row"]
     type RoomStatus = "pending" | "in session" | "finished"
+    type ListenerRoomProps = Tables["listeners_room"]["Row"]
+    type FormState = "idle" | "loading" | "error" | "success"
+    type CallApiState = "idle" | "loading" | "success" | "error"
 
     interface Metadata {
         firstName: string
@@ -22,16 +28,8 @@ declare global {
         reset: () => void
     }
 
-    type Profile = Tables["profiles"]["Row"]
-    type RoomType = Tables["rooms"]["Row"]
-    type ListenerRoomProps = Tables["listeners_room"]["Row"]
-
     interface ChildrenPropType {
         children: ReactNode
     }
-
-    type Roles = "DJ" | "Listener"
-    type AuthActions = "Log In" | "Sign Up"
-    type FormState = "idle" | "loading" | "error" | "success"
 }
 export {}

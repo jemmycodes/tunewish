@@ -11,7 +11,12 @@ const authPages = [
     "/account/Listener/signup",
     "/account/Listener/forgot-password",
 ]
-const protectedPages: string[] = ["/DJ/home", "/Listener/home"]
+const protectedPages: string[] = [
+    "/DJ",
+    "/DJ/rooms",
+    "/DJ/settings",
+    "/Listener",
+]
 
 const redirectWithHeaders = (
     url: string,
@@ -40,12 +45,12 @@ export async function middleware(request: NextRequest) {
 
     if (user && authPages.includes(request.nextUrl.pathname))
         newResponse = redirectWithHeaders(
-            `/${user.user_metadata.role}/home`,
+            `/${user.user_metadata.role}`,
             request,
             response,
         )
 
-    console.log(user)
+    // console.log(user)
 
     return newResponse
 }

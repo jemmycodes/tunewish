@@ -41,7 +41,7 @@ const useLogin = (schema: z.ZodSchema<any>) => {
                     "Logged in successfully, Please wait while we redirect you to your dashboard",
             })
             setFormState("success")
-            router.push(`/${data.user.user_metadata.role}/home`)
+            router.push(`/${data.user.user_metadata.role}`)
         }
         setFormState("idle")
     }
