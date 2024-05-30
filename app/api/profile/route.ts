@@ -8,8 +8,6 @@ export async function GET() {
 
     const { data, error } = await supabase.from("profiles").select("*").single()
 
-    console.log(1, data, error, "profile route")
-
     if (error) {
         return NextResponse.json({
             message:

@@ -13,7 +13,6 @@ const CheckRole = ({ children, role }: CheckRoleProps) => {
     const { userProfile, apiResponse, handleRetry } = useProfile()
 
     if (apiResponse === "error") {
-        console.log(apiResponse)
         return (
             <div className="flex min-h-screen w-screen items-center justify-center p-4">
                 <div className="max-w-sm rounded-lg border-stone-800 bg-stone-950 px-4 py-3 text-sm text-stone-50">

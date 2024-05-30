@@ -1,13 +1,31 @@
+import { cookies } from "next/headers"
 import { IoAdd } from "react-icons/io5"
 import RoomCard from "@/app/_components/ui/RoomCard"
-import { supabaseServerClient } from "@/supabase/server"
 import CustomDialog from "@/app/_components/ui/CustomDialog"
+import { createSupabaseServerComponent } from "@/supabase/server"
 
 const Rooms = async () => {
-    const supabase = supabaseServerClient()
+    const cookie = cookies()
+    const supabase = createSupabaseServerComponent(cookie)
 
-    const { data: rooms, error } = await supabase.from("rooms").select("*")
-    // .eq("dj_id", "1")
+    const getUser = async () => {
+        const {
+            data: { user },
+        } = await supabase.auth.getUser()
+
+        if (!user) {
+            throw new Error("An error occurred")
+        }
+
+        return user.id
+    }
+
+    const userID = await getUser()
+
+    const { data: rooms, error } = await supabase
+        .from("rooms")
+        .select("*")
+        .eq("dj_id", userID)
 
     if (error) {
         throw new Error(error.message)
