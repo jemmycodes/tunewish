@@ -1,20 +1,17 @@
 import { ReactNode } from "react"
 import { cookies } from "next/headers"
-import { GiClothes } from "react-icons/gi"
 import { IoPeople } from "react-icons/io5"
+import { GiClothes } from "react-icons/gi"
+import {
+    RoomDetailButtonDJ,
+    RoomDetailButtonListener,
+} from "@/app/_components/ui/RoomDetailButton"
 import { Badge } from "@/components/ui/badge"
 import { AiFillMessage } from "react-icons/ai"
 import { FaLocationDot } from "react-icons/fa6"
 import { createSupabaseServerComponent } from "@/supabase/server"
-import RoomDetailButton from "@/app/_components/ui/RoomDetailButton"
 
-interface RoomDetailsProps {
-    params: {
-        slug: string
-    }
-}
-
-const RoomDetails = async ({ params }: RoomDetailsProps) => {
+const RoomDetails = async ({ params }: { params: Record<string, string> }) => {
     const cookie = cookies()
 
     const supabase = createSupabaseServerComponent(cookie)
@@ -22,6 +19,8 @@ const RoomDetails = async ({ params }: RoomDetailsProps) => {
     const {
         data: { user },
     } = await supabase.auth.getUser()
+
+    if (!user) return
 
     const role = user?.user_metadata.role
 
@@ -31,12 +30,14 @@ const RoomDetails = async ({ params }: RoomDetailsProps) => {
             `
     *,
     dj (
-      username
+      username, dj_id
     )
   `,
         )
         .eq("room_id", params.slug)
         .single()
+
+    console.log(room)
 
     if (error) {
         if (error?.code === "22P02") {
@@ -64,7 +65,7 @@ const RoomDetails = async ({ params }: RoomDetailsProps) => {
             <main className="mx-auto max-w-3xl space-y-6 p-4">
                 <Badge variant="outline">
                     <span
-                        className={`p-1 ${room.status === "pending" ? "bg-orange-600" : room.status === "in session" ? "bg-green-600" : "bg-red-600"} mr-2  rounded-full`}
+                        className={`p-1 ${room.status === "Pending" ? "bg-orange-600" : room.status === "in session" ? "bg-green-600" : "bg-red-600"} mr-2  rounded-full`}
                     ></span>
                     <p className="capitalize">{room.status}</p>
                 </Badge>
@@ -86,11 +87,18 @@ const RoomDetails = async ({ params }: RoomDetailsProps) => {
                     />
                 </ul>
 
-                <RoomDetailButton
-                    role={role}
-                    room_id={params.slug}
-                    listener_id={user?.id}
-                />
+                {role === "Listener" ? (
+                    <RoomDetailButtonListener
+                        listener_id={user.id}
+                        room_id={room.room_id}
+                    />
+                ) : (
+                    <RoomDetailButtonDJ
+                        room_id={room.room_id}
+                        status={room.status}
+                        dj_id={room.dj_id}
+                    />
+                )}
             </main>
         </>
     )

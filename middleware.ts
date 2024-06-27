@@ -1,5 +1,5 @@
-import { updateSession } from "@/supabase/server/middleware"
 import { NextRequest, NextResponse } from "next/server"
+import { updateSession } from "@/supabase/server/middleware"
 
 const authPages = [
     "/account/DJ/login",
@@ -49,8 +49,6 @@ export async function middleware(request: NextRequest) {
             request,
             response,
         )
-
-    // console.log(user)
 
     return newResponse
 }

@@ -16,7 +16,7 @@ const Error = ({ error, reset }: ErrorProps) => {
             </h1>
             <h2 className="font-bold">Seems you have a broken link</h2>
             <p className="max-w-sm text-center text-sm text-stone-400">
-                {error.message ||
+                {error?.message ||
                     "This room does not exist or has been deleted. Contact the host for more information."}
             </p>
             <span className="flex gap-4">

@@ -8,6 +8,18 @@ declare global {
         password: string
     }
 
+    interface SpotifyAccessToken {
+        access_token: string
+        refresh_token: string
+    }
+
+    interface Track {
+        id: string
+        name: string
+        images: string[]
+        artists: { name: string; id: string }[]
+    }
+
     type Roles = "DJ" | "Listener"
     type RoomType = Tables["rooms"]["Row"]
     type AuthActions = "Log In" | "Sign Up"
@@ -24,7 +36,7 @@ declare global {
     }
 
     interface ErrorProps {
-        error: Error & { digest?: string }
+        error?: Error & { digest?: string }
         reset: () => void
     }
 

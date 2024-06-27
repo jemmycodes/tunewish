@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/ui/theme-provider"
+import { SpotifyAccessTokenProvider } from "@/app/context/useSpotifyAccessToken"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -20,15 +21,17 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="dark"
-                    enableSystem
-                    disableTransitionOnChange
-                >
-                    <Toaster />
-                    {children}
-                </ThemeProvider>
+                <SpotifyAccessTokenProvider>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="dark"
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        <Toaster />
+                        {children}
+                    </ThemeProvider>
+                </SpotifyAccessTokenProvider>
             </body>
         </html>
     )

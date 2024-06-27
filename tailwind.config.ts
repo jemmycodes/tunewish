@@ -20,6 +20,7 @@ const config = {
         extend: {
             screens: {
                 mlg: "520px",
+                "2xsm": "420px",
             },
             backgroundImage: {
                 "purple-gradient":
@@ -46,11 +47,16 @@ const config = {
             },
             gridTemplateColumns: {
                 dashboard: "200px 1fr",
+                session_cards: "repeat(auto-fill, minmax(200px, 1fr))",
                 dashboard_cards: "repeat(auto-fill, minmax(300px, 1fr))",
+                request_cards: "repeat(auto-fill, minmax(300px, 1fr))",
             },
         },
     },
-    plugins: [require("tailwindcss-animate")],
+    plugins: [
+        require("tailwindcss-animate"),
+        require("tailwind-scrollbar-hide"),
+    ],
 } satisfies Config
 
 export default config

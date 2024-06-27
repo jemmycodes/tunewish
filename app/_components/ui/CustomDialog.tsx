@@ -10,6 +10,7 @@ import {
     DialogDescription,
 } from "@/components/ui/dialog"
 import { useForm } from "react-hook-form"
+import ShortUniqueId from "short-unique-id"
 import { ReactNode, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Form } from "@/components/ui/form"
@@ -53,10 +54,16 @@ const CustomDialog = ({ trigger }: CustomDialogProps) => {
     })
 
     const onSubmit = async (values: z.infer<typeof CreateRoomSchema>) => {
+        const { randomUUID } = new ShortUniqueId({ length: 8 })
+
         setFormState("loading")
         const res = await fetch(`${location.origin}/api/DJ/create-room`, {
             method: "POST",
-            body: JSON.stringify(values),
+            body: JSON.stringify({
+                ...values,
+                room_id: randomUUID(),
+                status: "Pending",
+            }),
         })
 
         const data = await res.json()
