@@ -1,12 +1,11 @@
 import Image from "next/image"
 import { BASE_URL } from "@/utils/functions"
+import RoleParams from "@/app/_layouts/RoleParams"
+import DJPanel from "@/app/_components/session/DJPanel"
 import SessionSearch from "@/app/_components/session/SessionSearch"
-import SessionTracks from "@/app/_components/session/SessionTracks"
-import ConnectSpotify from "@/app/_components/spotify/ConnectSpotify"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import SessionRequests from "@/app/_components/session/SessionRequests"
+import ListenerPanel from "@/app/_components/session/ListenerPanel"
 
-const Session = async () => {
+const Session = async ({ searchParams }: Record<string, URLSearchParams>) => {
     const res = await fetch(`${BASE_URL}/api/spotify/get-tracks`)
     const tracks = await res.json()
 
@@ -20,8 +19,10 @@ const Session = async () => {
         url: tracks[randomNumber].images[0],
     }
 
+    const role = new URLSearchParams(searchParams).get("role")
+
     return (
-        <>
+        <RoleParams>
             <header
                 className={`relative flex h-[50vh] w-screen flex-col   justify-end bg-cover bg-center`}
             >
@@ -44,16 +45,13 @@ const Session = async () => {
             <main className="relative p-4">
                 <SessionSearch />
 
-                <Tabs defaultValue="Tracks" className="my-3 w-full">
-                    <TabsList>
-                        <TabsTrigger value="Tracks">Tracks</TabsTrigger>
-                        <TabsTrigger value="Requests">Requests</TabsTrigger>
-                    </TabsList>
-                    <SessionTracks tracks={tracks} />
-                    <SessionRequests image={headerInfo.url} />
-                </Tabs>
+                {role === "DJ" ? (
+                    <DJPanel tracks={tracks} headerInfo={headerInfo} />
+                ) : (
+                    <ListenerPanel tracks={tracks} />
+                )}
             </main>
-        </>
+        </RoleParams>
     )
 }
 
