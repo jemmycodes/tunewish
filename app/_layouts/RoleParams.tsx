@@ -1,9 +1,9 @@
 "use client"
 
 import { supabase } from "@/supabase/client"
-import { useCallback, useEffect, useMemo, useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
 import LoadingScreen from "@/app/_layouts/LoadingScreen"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 const RoleParams = ({ children }: ChildrenPropType) => {

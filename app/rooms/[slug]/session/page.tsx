@@ -5,7 +5,7 @@ import DJPanel from "@/app/_components/session/DJPanel"
 import SessionSearch from "@/app/_components/session/SessionSearch"
 import ListenerPanel from "@/app/_components/session/ListenerPanel"
 
-const Session = async ({ searchParams }: Record<string, URLSearchParams>) => {
+const Session = async ({ searchParams }: { searchParams: URLSearchParams }) => {
     const res = await fetch(`${BASE_URL}/api/spotify/get-tracks`)
     const tracks = await res.json()
 
