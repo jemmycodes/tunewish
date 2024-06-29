@@ -5,6 +5,7 @@ import { useToast } from "@/components/ui/use-toast"
 import LoadingScreen from "@/app/_layouts/LoadingScreen"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { verifyDJ, verifyListener } from "@/utils/functions"
 
 const RoleParams = ({ children }: ChildrenPropType) => {
     const { toast } = useToast()
@@ -41,7 +42,28 @@ const RoleParams = ({ children }: ChildrenPropType) => {
             }
 
             params.set("role", data.user.user_metadata.role)
-            router.push(pathname + "?" + params.toString())
+            const role = params.get("role")
+            const room_id = pathname.split("/")[2]
+            if (role === "DJ") {
+                const response = await verifyDJ(data.user.id)
+                if (response) {
+                    toast(response)
+                    router.replace(`/rooms/${room_id}`)
+                    return
+                }
+                router.push(`${pathname}?role=${role}`)
+            }
+
+            if (role === "Listener") {
+                const response = await verifyListener(data.user.id, room_id)
+                if (response) {
+                    toast(response)
+                    router.replace(`/rooms/${room_id}`)
+                    return
+                }
+
+                router.push(`${pathname}?role=${role}`)
+            }
         } catch (error) {
             console.error(error)
         } finally {

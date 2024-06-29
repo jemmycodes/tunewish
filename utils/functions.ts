@@ -134,3 +134,52 @@ export const checkIfListenerInRoom = async ({
 
     return
 }
+
+export const verifyDJ = async (id: string) => {
+    const { data: user_id, error } = await supabase
+        .from("rooms")
+        .select("dj_id")
+        .eq("dj_id", id)
+        .single()
+
+    if (error) {
+        return {
+            title: "Error",
+            description: "You dont have access to start this room!",
+        }
+    }
+
+    if (!user_id) {
+        return {
+            title: "Error",
+            description: "An error occurred",
+        }
+    }
+
+    return
+}
+
+export const verifyListener = async (id: string, room_id: string) => {
+    const { data, error } = await supabase
+        .from("listeners_room")
+        .select("listener_id")
+        .eq("listener_id", id)
+        .eq("room_id", room_id)
+        .single()
+
+    if (error) {
+        return {
+            title: "Error",
+            description: "An error occurred",
+        }
+    }
+
+    if (!data) {
+        return {
+            title: "Error",
+            description: "You do not have access to this room",
+        }
+    }
+
+    return
+}
